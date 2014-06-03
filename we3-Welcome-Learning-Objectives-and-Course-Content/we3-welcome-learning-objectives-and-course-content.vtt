@@ -1,0 +1,482 @@
+WEBVTT
+
+1
+00:00:02.135 --> 00:00:05.635
+Welcome to part III of our MOOC "Web Engineering".
+
+2
+00:00:07.727 --> 00:00:11.735
+My name is Klaus Quibeldey-Cirkel. I am the instructor of this course.
+
+3
+00:00:11.985 --> 00:00:34.135
+The language of the videos is German, because this MOOC is part of a German university lecture at Technische Hochschule Mittelhessen (THM) and our students have a right to German lesson.
+
+4
+00:00:34.385 --> 00:00:45.469
+Anyway: In our times of globalization it doesn't hurt to have listened to one or another foreign language once in a while.
+
+5
+00:00:45.719 --> 00:00:49.282
+Now, let's get to our introductory video.
+
+6
+00:00:49.532 --> 00:00:53.032
+I will briefly explain the learning objectives of this course,
+
+7
+00:00:53.282 --> 00:01:02.000
+and the prerequisites for finishing the course successfully.
+
+8
+00:01:02.252 --> 00:01:06.735
+I will introduce you to our two projects:
+
+9
+00:01:06.985 --> 00:01:12.405
+A term project everyone needs to do.
+
+10
+00:01:12.655 --> 00:01:26.869
+And an optional, voluntary Scrum project in September in which you may participate offshore, i.e. from home online.
+
+11
+00:01:27.119 --> 00:01:36.935
+Finally, I'll give you the course dates for the homeworks and the final exam.
+
+12
+00:01:37.185 --> 00:01:40.685
+
+
+13
+00:01:40.935 --> 00:01:44.435
+First, the course objectives:
+
+14
+00:01:44.685 --> 00:01:51.269
+There are two main proficiency objectives we want to convey:
+
+15
+00:01:51.519 --> 00:02:06.135
+1. Mastering the maintenance challenges of Web apps that need to be changed and brought into production often.
+
+16
+00:02:06.385 --> 00:02:21.535
+This means, the first objective is about engineering skills like build automation, performance and browser testing, and continous deployment.
+
+17
+00:02:21.785 --> 00:02:30.402
+That is, iterating the process of getting your code ready for production once your have edited your changes.
+
+18
+00:02:30.652 --> 00:02:47.069
+2. What is special about this MOOC, is that you will have a chance to practice collaboration in a continous delivery environment during two weeks in September:
+
+19
+00:02:47.319 --> 00:03:01.735
+Practising soft kills/team skills by collaborating with your peers, communicating, and coordinating.
+
+20
+00:03:01.985 --> 00:03:05.485
+We will offer this project during a two-week offshore scrum project in September.
+
+21
+00:03:05.735 --> 00:03:21.135
+You will work together on a project with the students of THM.
+
+22
+00:03:21.385 --> 00:03:33.269
+It will be very interesting to organize both "offshore" and "onshore" students together in a project and to elaborate on it on a daily basis
+
+23
+00:03:33.519 --> 00:03:40.935
+and to come up with a release at the end of the project.
+
+24
+00:03:41.185 --> 00:03:45.135
+What will this Scrum project be about?
+
+25
+00:03:45.385 --> 00:04:07.535
+We want to further develop a prototype app called THMCards, i.e. add new features known from apps like "Quizduell" and others.
+
+26
+00:04:07.785 --> 00:04:21.202
+This project is an super modern open source, single page and full stack javascript app.
+
+27
+00:04:21.452 --> 00:04:29.269
+With a NoSQL database and Node.js as backend.
+
+28
+00:04:29.519 --> 00:04:35.469
+Let's get to the prerequisites:
+
+29
+00:04:35.719 --> 00:04:39.219
+
+
+30
+00:04:39.469 --> 00:05:06.604
+The must-have hardware prerequisites are:
+1. access to a fast internet connection
+2. a modern multi-core computer (desktop/notebook) with at least 4 GB RAM
+
+31
+00:05:06.854 --> 00:05:42.002
+The software prerequisites are:
+1. any OS will do, we will use a virtual environment
+2. you need to a have a Unix/Linux terminal/command shell installed on your computer
+
+32
+00:05:42.252 --> 00:05:54.400
+If you use a Windows OS, you need to make sure that your command shell offers the full functionality of a bash shell.
+
+33
+00:05:54.650 --> 00:06:06.069
+3. Oracle Virtual Box should be installed as virtualization software; however, we can talk about alternatives.
+
+34
+00:06:06.869 --> 00:06:11.469
+What are the brainware prerequisites?
+
+35
+00:06:12.719 --> 00:06:21.219
+Web Engineering III builds on the competences gained in Web Engineering I and II.
+
+36
+00:06:21.719 --> 00:06:36.735
+It is not necessary that you have attended those two courses, but it is required that you have the knowledge you could have acquired in those courses.
+
+37
+00:06:36.985 --> 00:07:02.269
+1. You should have a solid command of Unix/Linux commands, of HTML5, and JavaScript, because we will build, test and deploy apps based on these techniques.
+
+38
+00:07:02.519 --> 00:07:11.669
+You should be willing to participate in a two-week Scrum project.
+
+39
+00:07:12.519 --> 00:07:23.409
+However, attending the Scrum project is not required to get the Certificate of Accomplishement or the Statement of Participation.
+
+40
+00:07:27.159 --> 00:07:31.159
+This slides gives an overview about the six chapters of this MOOC.
+
+41
+00:07:36.719 --> 00:08:15.744
+The tools I marked with a curly bracket are the tools that we will learn to use based on the ARSnova app which most of you got to know through some surveys during part 1 and 2 of the MOOC.
+
+42
+00:08:15.994 --> 00:08:32.869
+All these tools are available as open source tools online, the build pipeline, the project environment, GitLab and the project management tool Redmine.
+
+43
+00:08:33.119 --> 00:08:41.135
+By practising these tools on the productive, running ARSnova app, you will be able to study them in depth.
+
+44
+00:08:45.385 --> 00:08:51.334
+There are four Homework Assignments planned for this course:
+
+45
+00:08:51.584 --> 00:09:07.949
+All of these assignments serve to prove that you have understood the contents of the videos and additional materials provided in this course
+
+46
+00:09:08.000 --> 00:09:15.699
+and that you are able to apply that knowledge using the respective tools.
+
+47
+00:09:15.949 --> 00:09:29.335
+You will learn to create test plans with Apache JMeter
+
+48
+00:09:29.585 --> 00:09:45.615
+by putting the ARSnova app under load and then watching the response times and if the app works as expected.
+
+49
+00:09:45.865 --> 00:09:50.735
+You will use Selenium for GUI tests,
+
+50
+00:09:50.985 --> 00:10:03.002
+that means, you will script the interaction with the browser and play back the scripts in different browser products
+
+51
+00:10:03.252 --> 00:10:10.069
+to check if the app is cross-browser compatible.
+
+52
+00:10:10.319 --> 00:10:13.819
+We will use Jenkins as our build environment.
+
+53
+00:10:14.069 --> 00:10:27.002
+The objective here is being able to formulate and execute Ant Maven build scripts.
+
+54
+00:10:27.252 --> 00:10:55.869
+SonarCube is an open source analytics tools, that creates a static analysis of ARSnova and produces different metrics that we will learn how to interpret.
+
+55
+00:10:56.119 --> 00:10:59.619
+
+
+56
+00:10:59.869 --> 00:11:03.369
+Now, let's have a look at the term project:
+
+57
+00:11:03.619 --> 00:11:17.069
+For the term project, it is absolutely necessary that you provide an open source HTML5 app which you have developed yourself or
+
+58
+00:11:17.319 --> 00:11:29.547
+that you can develop such an app within the next few weeks. This app should be have a certain degree of usefulness.
+
+59
+00:11:29.797 --> 00:11:35.072
+This app will be published on the web and be publicly available.
+
+60
+00:11:35.322 --> 00:11:41.602
+The sources (your Git repository) will also be made public for learning purposes.
+
+61
+00:11:41.852 --> 00:11:54.202
+At the end of the term project, you will have to submit your term project in the form of the following list of deliveries:
+
+62
+00:11:54.452 --> 00:12:12.680
+- You have to publish your source code in a public Git repository. Your sources must include a so called Vagrantfile.
+
+63
+00:12:12.930 --> 00:12:22.622
+The vagrant file allows creating virtual development, test and production environments via a terminal command locally on your computer.
+
+64
+00:12:28.119 --> 00:12:43.734
+- Apply the homework assigments you practised on the ARSnova app to your app:
+
+65
+00:12:43.984 --> 00:12:48.135
+i.e. test plans with Apache JMeter,
+
+66
+00:12:48.385 --> 00:12:52.935
+test scripts created with Selenium
+
+67
+00:12:53.185 --> 00:13:00.267
+the Maven Ant/Jenkins build scripts,
+
+68
+00:13:00.517 --> 00:13:06.269
+and the QA metrics generated with SonarCube.
+
+69
+00:13:06.519 --> 00:13:10.019
+
+
+70
+00:13:10.269 --> 00:13:24.667
+We will provide you with a publicly available source code management infrastructure for your term project
+
+71
+00:13:24.667 --> 00:13:28.167
+which you may also use for other projects if you like.
+
+72
+00:13:28.417 --> 00:13:33.869
+The SCM infrastructure will include the following tools (among others):
+
+73
+00:13:34.119 --> 00:13:41.070
+These are just the main tools that cover the learning objectives:
+
+74
+00:13:41.320 --> 00:13:45.669
+GitLab, a version management hosting system
+
+75
+00:13:45.919 --> 00:13:54.934
+comparable to GitHub but offering the possibility to add private repositories.
+
+76
+00:13:55.184 --> 00:14:05.402
+The build environment set up with Jenkins (formerly Hudson)
+
+77
+00:14:05.652 --> 00:14:20.002
+The project management tool Redmine including the Scrum plugin Backlogs.
+
+78
+00:14:20.252 --> 00:14:36.269
+CloudControl - introduced in Web Engineering I and II - as cloud hosting service for your web apps.
+
+79
+00:14:36.519 --> 00:14:40.019
+
+
+80
+00:14:40.269 --> 00:14:43.769
+What to expect from the final exam?
+
+81
+00:14:44.019 --> 00:15:08.735
+There will be 10 questions about the contents of all six chapters of Web Engineering III that need to be answered within 60 minutes.
+
+82
+00:15:08.985 --> 00:15:18.669
+During the final exam you will be asked to submit your term project.
+
+83
+00:15:18.919 --> 00:15:22.802
+The final exam will take place during the last week of July.
+
+84
+00:15:22.009 --> 00:15:27.552
+The grading process depends on the type of certificate you want to achieve:
+
+85
+00:15:27.802 --> 00:15:46.214
+For a Statement of Participation, your peers will review your project.
+
+86
+00:15:46.464 --> 00:16:03.269
+For a paid Certificate of Accomplishment, the project will be graded by a course instructor.
+
+87
+00:16:03.519 --> 00:16:11.269
+Your project will then be commented and your grade will be stated on the certificate.
+
+88
+00:16:11.519 --> 00:16:17.144
+There will also be a diploma supplement stating the course contents.
+
+89
+00:16:17.394 --> 00:16:34.002
+Your identity will be verified and it will be certified, that the certificate was acquired under supervision and.
+
+90
+00:16:34.252 --> 00:16:37.752
+The authenticity of the certificate will also be guaranteed.
+
+91
+00:16:38.002 --> 00:16:44.202
+What types of certificates can be obtained in this MOOC?
+
+92
+00:16:44.452 --> 00:16:54.269
+The prerequisites for all types of certificates are the same:
+
+93
+00:16:54.519 --> 00:17:22.469
+- your activity progress indicators must show 80% fulfillment on all units which can be achieved by watching the course videos and answering the quizzes
+
+94
+00:17:22.719 --> 00:17:29.219
+- submission of all homework assignments
+
+95
+00:17:29.469 --> 00:17:38.069
+- passing of the final exam
+
+96
+00:17:38.319 --> 00:17:46.867
+- your term project must fulfill the requirements
+
+97
+00:17:47.117 --> 00:18:01.069
+After sucessfully finishing all of the above requirements, you can download a Statement of Participation free of charge
+
+98
+00:18:01.319 --> 00:18:17.069
+To get a paid Certificate of Accomplishment, your ID needs to be verified. The proctored exam will take place online. The fee is 99 Euro.
+
+99
+00:18:17.319 --> 00:18:39.402
+Due to popular demand, we will introduce a new, special kind of performance record in this third part of Web Engineering.
+
+100
+00:18:39.652 --> 00:19:01.482
+A few years ago, the Mozilla foundation launched Open Badges (see http://openbadges.org).
+
+101
+00:19:01.732 --> 00:19:14.669
+Open Badges are digital indicators of real world skills and achievements (see Wikipedia).
+
+102
+00:19:14.919 --> 00:19:21.735
+The visual representations contain further information (metadata ) that is displayed when someone clicks on such a badge.
+
+103
+00:19:40.985 --> 00:19:48.485
+Such metadata include the issuer of the badge and the criteria/requirements that were necessary to obtain the badge.
+
+104
+00:19:48.735 --> 00:20:08.269
+It may also contain much more information like the course contents etc. The person eligible for such a badge may publish it on his/her website, blog, wiki or whereever on the internet he/she seems fit.
+
+105
+00:20:08.519 --> 00:20:24.135
+To obtain Open Badges from THM, you need to fulfill two prerequisites:
+
+106
+00:20:24.385 --> 00:20:36.885
+1. You need to finish this third part of Web Engineering successfully by acquiring a Statement of Participation.
+
+107
+00:20:37.135 --> 00:20:44.202
+2.You need to participation successfully in the two-week Scrum Project in September.
+
+108
+00:20:44.452 --> 00:20:50.135
+These badges will be issued free of charge.
+
+109
+00:20:50.385 --> 00:20:51.935
+
+
+110
+00:20:52.185 --> 00:20:55.945
+Finally, some important course dates:
+
+111
+00:20:56.195 --> 00:21:09.469
+The homework assignments will be published on a weekly basis at the end of each weekly chapter.
+
+112
+00:21:09.719 --> 00:21:18.669
+Altogether, there will be 4 homeworks. You will have two weeks to finish and submit each assignment.
+
+113
+00:21:18.919 --> 00:21:25.869
+However, there will be some overlap, because we want to finish the course within a timeframe of 6-7 weeks.
+
+114
+00:21:26.119 --> 00:21:40.802
+The final exam will take place during the last week of July. It's up to you to decide when you want to take the exam within this timeframe.
+
+115
+00:21:41.052 --> 00:21:46.202
+The exam lasts 60 minutes and may not be interrupted during this time.
+
+116
+00:21:46.452 --> 00:21:55.069
+The optional offshore Scrum project will take place during two weeks in September.
+
+117
+00:21:55.319 --> 00:21:58.819
+We will determine those two weeks by the help of an ARSnova survey.
+
+118
+00:21:59.069 --> 00:22:02.569
+
+
+119
+00:22:02.819 --> 00:22:08.935
+Good luck with the videos, the quizzes, the homeworks and your project.
+
