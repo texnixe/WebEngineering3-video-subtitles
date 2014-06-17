@@ -1,0 +1,234 @@
+WEBVTT
+
+1
+00:00:05.245 --> 00:00:23.322
+Ladies and Gentlemen, my experience as a teacher shows that its necessary to show students the way to achieve a target very clearly.
+
+2
+00:00:23.572 --> 00:00:28.682
+The objective of this chapter is explain the homework and the way to get there by working through the individual units
+
+3
+00:00:28.932 --> 00:00:39.042
+on the iversity platform one by one before starting with the homework.
+
+4
+00:00:39.292 --> 00:00:46.202
+Let's walk through the units of this chapter together.
+
+5
+00:00:46.452 --> 00:01:02.602
+In this unit, we will introduce you to a simple old benchmarking tool, Apache Bench.
+
+6
+00:01:02.852 --> 00:01:07.402
+This tool comes with the Apache HTTPServer.
+
+7
+00:01:07.652 --> 00:01:18.042
+The command here shows you how you can use Apache Bench to generate a synthetic repetitive load.
+
+8
+00:01:18.292 --> 00:01:21.792
+You may try this out but please don't increase the number of users beyond 1000.
+
+9
+00:01:22.042 --> 00:01:31.282
+Note: Please take part in the discussion in the section "Additional Materials" below the Focus Box.
+
+10
+00:01:31.532 --> 00:01:44.322
+These are discussion exercises in which you are supposed to take part and substantiate your opinions with the knowledge you have acquired by watching the videos and reading the additional materials.
+
+11
+00:01:44.572 --> 00:01:57.642
+Only if you write, argue or even fight, your learning will be sustainable.
+
+12
+00:01:57.892 --> 00:02:11.482
+In this chapter, discuss the pros and cons of a benchmark tool like Apache Bench for load and performance testing.
+
+13
+00:02:11.732 --> 00:02:17.322
+You may ask: How do I know that?
+
+14
+00:02:17.572 --> 00:02:30.882
+Studying means reading, researching, actually going to the library and finding sources.
+
+15
+00:02:31.132 --> 00:02:41.082
+Preparing yourself for a lecture with your own position and argue your case.
+
+16
+00:02:41.332 --> 00:02:55.042
+It's not enough to just repeat the things you are shown in the videos but you need to figure things out for yourself by studying the (additional) materials we provide.
+
+17
+00:02:55.292 --> 00:03:02.602
+So, please pay attention to the discussion tasks in the individual units.
+
+18
+00:03:02.852 --> 00:03:19.202
+The next unit recommends a 60-minute educational video by Mr. Prusak, Vice President Customer Success at BlazeMeter.
+
+19
+00:03:19.452 --> 00:03:22.952
+BlazeMeter is a company that is into JMeter.
+
+20
+00:03:23.202 --> 00:03:48.602
+Well, 60 minutes is quite a long time, but it's worth it. If you don't like that video, have a look at the long list of videos that deal with Apache JMeter.
+
+21
+00:03:48.852 --> 00:04:02.362
+Also, have a look at the original user documentation which you will find at http://jmeter.apache.org/usermanual/index.html
+
+22
+00:04:02.612 --> 00:04:11.242
+I strongly recommend you study the first 4/5 chapters.
+
+23
+00:04:11.492 --> 00:04:33.522
+These chapters contain step by step instructions for all activities required in dealing with JMeter.
+
+24
+00:04:33.772 --> 00:04:49.002
+These materials are sufficient, you don't need to buy a book. However, if you want to buy one, you find a recommendation in the respective unit.
+
+25
+00:04:49.252 --> 00:05:08.202
+Next, we will walk you through the performance test of ARSnova (this is not intended for you to just follow some clicks )
+
+26
+00:05:08.452 --> 00:05:19.802
+What you see here is a live detail of the performance graphs (here: use case "Give Feedback").
+
+27
+00:05:20.052 --> 00:05:23.552
+You can download the test plan (available in the "References and Attachments" section below the Focus Box).
+
+28
+00:05:23.802 --> 00:05:36.442
+You can then study this plan in detail and: It is part of your homework assignment.
+
+29
+00:05:36.692 --> 00:05:45.602
+While testing the load is one thing, you also have to record the performance in the production environment.
+
+30
+00:05:45.852 --> 00:05:51.882
+For this purpose, we will introduce you to the popular monitoring tool Munin.
+
+31
+00:05:52.132 --> 00:05:55.632
+Of course, for ARSnova.
+
+32
+00:05:55.882 --> 00:06:04.642
+You will be able to answer the quiz questions if you start Munin for ARSnova.
+
+33
+00:06:04.892 --> 00:06:20.882
+With each graphic, you get an idea of what server resources and load levels are measurable and what they mean.
+
+34
+00:06:21.132 --> 00:06:27.082
+What they mean, you can find out when you have a look at Wikipedia.
+
+35
+00:06:27.332 --> 00:06:39.922
+On this page, I have prepared two discussion threads:
+
+36
+00:06:40.172 --> 00:07:02.762
+1. What performance metrics are the most important to measure and control server capacity planning?
+
+37
+00:07:03.012 --> 00:07:09.402
+I recommend reading the free eBook "The Art of Capacity Planning".
+
+38
+00:07:09.652 --> 00:07:34.322
+The book is quite new and introduces you to the technical terms, methods, technologies, and tools you need even as a developer.
+
+39
+00:07:34.572 --> 00:07:40.962
+Finally, the homework assignment.
+
+40
+00:07:41.212 --> 00:07:55.642
+It's not easy to phrase such an assignment, but I hope the six instructions make it fairly clear.
+
+41
+00:07:55.892 --> 00:08:04.442
+The task is very realistic and could be part of a real project.
+
+42
+00:08:04.692 --> 00:08:11.042
+Please note the green links and follow them
+
+43
+00:08:11.292 --> 00:08:17.842
+In this task, we run two testing scenarios in parallel :
+
+44
+00:08:18.092 --> 00:08:26.842
+With a different degree of force and representing different use cases.
+
+45
+00:08:27.092 --> 00:08:43.842
+In the introductory video I mentioned that we had implemented such a testing environment for the Deutsche Bahn project (www.bahn.de) which was very complex.
+
+46
+00:08:44.092 --> 00:08:58.962
+To give you an idea, this website included more than 150 use cases that we had to understand.
+
+47
+00:08:59.212 --> 00:09:02.712
+These use cases needed to be understood in their utilization, in their quantity structure.
+
+48
+00:09:02.962 --> 00:09:26.002
+Then, these use cases had to be represented in a tool for 1000 simultaneous users. In this case, we didn't use JMeter but a tool that costs several 100,000 of Euros.These use cases had to be implemented with the defined Service Level Agreements.
+
+49
+00:09:26.252 --> 00:09:33.482
+Please don't rush into the homework assignment, but take the long way through the individual units.
+
+50
+00:09:33.732 --> 00:09:39.082
+You are expected to invest about 8 hours of your time into a chapter and you will need this time.
+
+51
+00:09:39.332 --> 00:09:45.042
+Now, let's have a look at the preview:
+
+52
+00:09:45.292 --> 00:09:58.682
+You will have create a couchDB dump in your vagrant-production machine.
+
+53
+00:09:58.932 --> 00:10:11.602
+and zip that dump file together with your JMeter test plan. Then, upload the zip file to the iversity platform.
+
+54
+00:10:11.852 --> 00:10:26.282
+In the peer review, you will have to ask a question in ARSnova while the background load defined by the test plan is running.
+
+55
+00:10:26.532 --> 00:10:40.682
+The reviewer is supposed to take on the role of a real user and evaluate the user experience under load.
+
+56
+00:10:40.932 --> 00:10:49.242
+The reviewer will also grade if you have prepared everything according to the instructions.
+
+57
+00:10:49.492 --> 00:10:59.802
+The quality of the test plan will be evaluated according to the scheme you can see here.
+
+58
+00:11:00.052 --> 00:11:20.122
+We hope that this video helps you to get the next homework assignments done economically and in a reasonable manner from the point of view of Educational Psychology.
+

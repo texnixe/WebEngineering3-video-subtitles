@@ -1,0 +1,279 @@
+WEBVTT
+
+1
+00:00:01.727 --> 00:00:10.802
+Welcome to our new Chapter "Performance Testing with Apache JMeter", an open source tool.
+
+2
+00:00:11.000 --> 00:00:16.440
+This chapter has two learning objectives:
+
+3
+00:00:16.690 --> 00:00:25.162
+1. Putting a web application under production load,
+
+4
+00:00:25.412 --> 00:00:41.682
+and measure and evaluate the Quality of Service using performance indicators like response times, throughput, resource utilization etc.
+
+5
+00:00:41.932 --> 00:00:49.842
+There are different models described in the literature.
+
+6
+00:00:50.092 --> 00:01:03.402
+However, in this chapter we will follow a model I know from my own practice when we tested the performance of the application of Deutsche Bahn (www.bahn.de).
+
+7
+00:01:03.652 --> 00:01:10.082
+The model that we use here has thus proven itself in practice.
+
+8
+00:01:10.652 --> 00:01:19.522
+Performance tests are not an end in itself, but must be goal-oriented.
+
+9
+00:01:19.772 --> 00:01:28.442
+The goal is to achieve a certain Quality of Service that has been agreed upon with the customer.
+
+10
+00:01:28.692 --> 00:01:32.002
+Such an agreement is called a Service Level Agreements (SLA).
+
+11
+00:01:32.252 --> 00:01:36.402
+Our tests will then have to monitor if our production environment complies with the SLA.
+
+12
+00:01:36.652 --> 00:01:42.002
+As developers we have to put these goals into practice.
+
+13
+00:01:42.252 --> 00:02:00.402
+The application will be evaluated under a given load, i.e. a defined number of virtual users that put stress on the system simultaneously according to the use cases.
+
+14
+00:02:00.652 --> 00:02:09.922
+While under this load, the performance (response times, throughput, resource utilization) is measured.
+
+15
+00:02:10.172 --> 00:02:20.762
+If a bottleneck is discovered, we can fix it in development.
+
+16
+00:02:21.012 --> 00:02:23.802
+All testing starts with the Service Level Agreements.
+
+17
+00:02:24.052 --> 00:02:29.082
+Then, the actual tests have to be prepared.
+
+18
+00:02:29.332 --> 00:02:37.802
+To make sure that the test is realistic, we have to get to know the application and its use cases thoroughly.
+
+19
+00:02:38.052 --> 00:02:49.602
+This is particularly true for those use cases that are associated with high loads and are business critical for the company.
+
+20
+00:02:49.852 --> 00:03:00.442
+This is called the critical click path. At one time, there will be a focus on this path to identify critical bottle necks.
+
+21
+00:03:00.692 --> 00:03:09.442
+The term usage patterns means uses cases and their frequency.
+
+22
+00:03:09.692 --> 00:03:24.882
+For different periods of time (year, month etc), the peak loads must be specified using hydrographs. These will then be the basis of the Service Level Agreement.
+
+23
+00:03:25.132 --> 00:03:34.442
+The goal is to create realistic tests, not just purely synthetic repetitive tests.
+
+24
+00:03:34.692 --> 00:03:39.922
+Therefore, the testing environment has to be as close to the production environment as possible.
+
+25
+00:03:40.172 --> 00:03:49.682
+For that purpose, agents are installed in the production environment, the server infrastructure that continually send measurement data to a controller
+
+26
+00:03:49.932 --> 00:03:59.242
+without sacrificing the performance of the system.
+
+27
+00:03:59.492 --> 00:04:04.482
+This is called instrumenting the application or the server.
+
+28
+00:04:04.732 --> 00:04:16.362
+In the easiest case, this means that the application will write logs than can be evaluated to define bottlenecks in the application.
+
+29
+00:04:16.612 --> 00:04:32.762
+Next, a test plan must be As the next step, a testplan must be devised.
+
+30
+00:04:33.012 --> 00:04:47.962
+The test plan is build by clicking through the application in the web browser and recording the steps.
+
+31
+00:04:48.212 --> 00:04:57.042
+Afterwards, user actions must be parameterized.
+
+32
+00:04:57.292 --> 00:05:13.682
+If, for example, 1000 users have to log in using their credentials, the login data cannot always be the same.
+
+33
+00:05:13.932 --> 00:05:29.202
+Therefore, the user data has to vary and deliver different inputs depending on use case.
+
+34
+00:05:29.452 --> 00:05:36.602
+This is a very complex and expensive process.
+
+35
+00:05:36.852 --> 00:05:48.642
+Each use case must be combed through and parameterized by a comma-separated value lists.
+
+36
+00:05:48.892 --> 00:06:01.802
+This procedure becomes even more complicated if external systems are involved, e.g. credit card systems or LDAP systems for user management.
+
+37
+00:06:02.052 --> 00:06:09.522
+In such cases, user accounts must be created for test cases.
+
+38
+00:06:09.772 --> 00:06:19.282
+On top, you need a production-like background load. Ideally, you can access the production database with its contents.
+
+39
+00:06:19.532 --> 00:06:32.962
+At least, you need a quantity structure you can represent in your testing environment using mock ups.
+
+40
+00:06:33.212 --> 00:06:41.562
+Finally, you run the tests from different angles.
+
+41
+00:06:41.812 --> 00:06:54.842
+At first, you do a performance test under moderate load to evaluate the response times.
+
+42
+00:06:55.092 --> 00:07:09.562
+You will measure the round trip time, i.e. the time from the front end to the database, query of data and the delivery of the data to the front end in the browser.
+
+43
+00:07:09.812 --> 00:07:22.162
+Next, under load you will then test the responsiveness of the system, the reliability and the throughput and the scalability.
+
+44
+00:07:22.412 --> 00:07:41.442
+i.e. if you can use server resources (more memory etc.) to react to doubling of the load.
+
+45
+00:07:41.692 --> 00:08:07.042
+A load test aims to guarantee that a Service Level Agreement with for example, 1000 virtual users per second, can be complied with.
+
+46
+00:08:07.292 --> 00:08:18.162
+During a load test, the system is thus in a state of high utilization, but not in a state of overload.
+
+47
+00:08:18.412 --> 00:08:36.722
+A stress test, on the other hand, aims to bring a system to its knees to identify the bottlenecks that are likely to be the first to reduce the performance of the system.
+
+48
+00:08:36.972 --> 00:08:45.922
+In most cases, this is the so called opener. Once this problem is fixed, the throughput will be high again.
+
+49
+00:08:45.932 --> 00:08:55.362
+A stress test brings a system to its knee. You can then analyze the failure and change the configuration of the server
+
+50
+00:08:55.612 --> 00:09:04.442
+or tune the application in order to eliminate the bottlenecks.
+
+51
+00:09:05.642 --> 00:09:22.802
+Overall, you will collect lots of data and analyze them in order to implement the objectives of the Service Level Agreement.
+
+52
+00:09:23.052 --> 00:09:50.122
+It is important to identify the responsibilities. If you have a 3 level architecture (web client,  a middleware component, and a database) you need to identify in which level the bottleneck occurs.
+
+53
+00:09:50.372 --> 00:10:05.042
+When doing a load and stress test, all development teams, operations engineers and administrators are in the boat.
+
+54
+00:10:05.292 --> 00:10:15.002
+The second important learning objective is:
+Evaluating User Experience under load.
+
+55
+00:10:15.252 --> 00:10:36.122
+This means to find out how a real user experiences the system when it is under production or stress load.
+
+56
+00:10:36.372 --> 00:10:51.682
+To do so, you will bring the system into the state of the so called background load that is defined by the Service Level Agreement., e.g. 1000 users that do something with the system.
+
+57
+00:10:51.932 --> 00:10:59.322
+Then, you come in and do something and you will measure how long it takes until the system delivers.
+
+58
+00:10:59.572 --> 00:11:05.042
+The exercises in the homework assignment will ask you to  implement this twofold testing scenario:
+
+59
+00:11:05.292 --> 00:11:23.962
+Implement an automated performance testing environment and then experience the system properties as a real user.
+
+60
+00:11:24.212 --> 00:11:31.202
+Let's get to Homework Assignment #1:
+
+61
+00:11:31.452 --> 00:11:45.442
+Your task is to set our learning vehicle ARSnova under load to test its performance.
+
+62
+00:11:45.692 --> 00:11:57.202
+Since the testing environment must be production-like, you need to use the production environment vagrant-production.
+
+63
+00:11:57.452 --> 00:12:16.602
+In the next few days, we will provide the configuration files that are as close as possible to the server configuration of the production system.
+
+64
+00:12:16.852 --> 00:12:31.242
+As you can see on the screenshot, there is a synthetic load of hundreds of users generated automatically by using the test plans.
+
+65
+00:12:31.492 --> 00:12:39.362
+While the background load is in place, you come in
+
+66
+00:12:39.612 --> 00:12:54.562
+and perform an individual test as one of many thousand users and evaluate the responsiveness of the system under load.
+
+67
+00:12:54.812 --> 00:13:04.442
+It is you task to create such a test plan using the open source tool Apache JMeter.
+
+68
+00:13:04.692 --> 00:13:08.522
+You will then submit this test plan for peer review.
+
+69
+00:13:08.772 --> 00:13:13.082
+The deadline for homework #1 is June 29th, 2014, 23:59 CEST.
+
