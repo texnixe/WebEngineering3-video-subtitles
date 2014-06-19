@@ -1,0 +1,356 @@
+0
+00:00:00,000 --> 00:00:13,642
+In this screencast, I want to explain the structure of an Apache JMeter test plan.
+
+1
+00:00:13,642 --> 00:00:20,042
+ I will use the ARSnova use case "Instant Feedback" as an example.
+
+2
+00:00:20,292 --> 00:00:29,442
+Let's start with the system under test, ARSnova,
+
+3
+00:00:29,692 --> 00:00:36,562
+and look at the scenario "Instant Feedback"
+
+4
+00:00:36,812 --> 00:00:50,962
+We start ARSnova in our vagrant-production machine.
+
+5
+00:00:52,212 --> 00:00:55,712
+First, you log in as guest.
+
+6
+00:00:55,962 --> 00:01:06,682
+Next, you enter a session that you have created before, in this case PerfTest.
+
+7
+00:01:06,932 --> 00:01:14,642
+By tapping on "Give Feedback" and choosing a Feedback option, you can give the teacher feedback if you can follow the lecture.
+
+8
+00:01:14,892 --> 00:01:28,482
+When we do our performance test later, the bars in this diagram will reflect the actions of the virtual users.
+
+9
+00:01:28,732 --> 00:01:36,962
+Later, when you perform the use case under load, you can tap the icons on this page directly (without having to tap on "Give Feedback on the preceding page).
+
+10
+00:01:37,212 --> 00:01:41,642
+Now, let's get to the test plan.
+
+11
+00:01:41,892 --> 00:01:45,392
+I have prepared two scenarios:
+
+12
+00:01:45,642 --> 00:02:06,482
+The first scenario (Small Lecture Hall) with 10 virtual users who start the scenario within 5 seconds (ramp up period) and run the use case once (loop count 1)
+
+13
+00:02:06,732 --> 00:02:36,682
+The second scenario (Large Lecture Hall), is the same as before, but with 100 simultaneous virtual users.
+
+14
+00:02:36,932 --> 00:02:47,362
+As User Defined Variable there is the Session ID.
+
+15
+00:02:47,612 --> 00:02:58,642
+When you work with your own session, you will have to change the value for session key.
+
+16
+00:02:58,892 --> 00:03:04,282
+Next, the users have to log in, this will be done via the Guest Login.
+
+17
+00:03:04,532 --> 00:03:08,032
+For this purpose, we use a Random Variable with randomly generated values.
+
+18
+00:03:08,282 --> 00:03:17,242
+These values will be generated for each user separately (Options > Per Thread(User): True).
+
+19
+00:03:17,492 --> 00:03:35,562
+In real life, the users will then consider which option they want to tap. This period is called Think Time oder Wait Time.
+
+20
+00:03:35,812 --> 00:03:48,922
+We assume that this Think Time will be 1 to 5 seconds, and will configure this Think Time as a Random Variable for each user individually.
+
+21
+00:03:49,172 --> 00:04:01,442
+Then, the users need to give feedback in the way described before. There are 4 values.
+
+22
+00:04:01,692 --> 00:04:05,802
+From "I can follow you" to "You have lost me".
+
+23
+00:04:06,052 --> 00:04:12,602
+Internally, these values are defined as integer values 0 to 3.
+
+24
+00:04:12,852 --> 00:04:22,722
+Again, the values are generated randomly for each user individually.
+
+25
+00:04:22,972 --> 00:04:50,482
+For the samplers (HTTP request controllers) we define - for convenience's sake - the URL and the port.
+
+26
+00:04:50,732 --> 00:04:54,232
+In our case, the Web Server is localhost (or 127.0.0.1) and the Port Number 8080.
+
+27
+00:04:54,482 --> 00:05:09,562
+We want to simulate a realistic browser, therefore we tell JMeter to load all resources in each run (Retrieve All Embedded Resources).
+
+28
+00:05:09,812 --> 00:05:24,402
+That is, images, JavaScript (although JMeter does not interpret JS), videos, audio, external sources etc.
+
+29
+00:05:24,652 --> 00:05:30,282
+We allow four parallel HTTP requests on a TCP connection (Use concurrent pool. Size: 4).
+
+30
+00:05:30,532 --> 00:05:37,682
+ARSnova uses cookies for the security architecture in the backend.
+
+31
+00:05:37,932 --> 00:05:57,842
+In the HTTP Header Manager, we tell JMeter that we use application/json as exchange format for all requests and responses.
+
+32
+00:05:58,092 --> 00:06:02,562
+Therefore, we can define this format as a general header value.
+
+33
+00:06:02,812 --> 00:06:17,242
+No, we will get to the activities the virtual user has to perform in the use case scenario "Give Feedback" of this test plan.
+
+34
+00:06:17,492 --> 00:06:20,992
+First, the user has to log in. In the HTTP Request form you can see the detailed data that is exchanged.
+
+35
+00:06:21,242 --> 00:06:37,962
+It is a GET request. The necessary GET-parameters are type, user, and role. The user Guest ID was defined as a random variable.
+
+36
+00:06:38,212 --> 00:06:46,402
+Once the user is logged in, he/she needs to log in to a session.
+
+37
+00:06:46,652 --> 00:06:57,762
+To do this, the session ID has to be added to the URI in the path field: i.e. session/$(SESSIONKEY).
+
+38
+00:07:02,012 --> 00:07:18,162
+Then the number of active users is queried (indicated by the badges on the house icon on the start page of a session) using the path /session/$(SESSIONKEY)/activeusercount.
+
+39
+00:07:18,412 --> 00:07:29,362
+Next, the actual scenario starts. It is embedded in a Loop Controller which repeats the scenario 10 times. 
+
+40
+00:07:29,612 --> 00:07:37,642
+That is, the virtual user gives his/her feedback ten times.
+
+41
+00:07:38,892 --> 00:07:49,442
+Between each of these actions, there is a random Think Time of 1 to 5 seconds. In the Constant Timer the Thread Delay is set to the Think Time variable ($(TIMER))
+
+42
+00:07:49,692 --> 00:08:13,762
+Give Feedback is a POST request with the respective body data, in this case only a number as a code for the selected option $(FEEDBACK).
+
+43
+00:08:14,012 --> 00:08:26,882
+Next, the feedback result is queried.
+
+44
+00:08:27,132 --> 00:08:33,442
+The number of feedbacks is indicated by the badge on the feedback icon.
+
+45
+00:08:33,692 --> 00:08:39,042
+Once the loop is over, the user is logged out (Guest Logout).
+
+46
+00:08:39,292 --> 00:08:48,162
+We have defined some listeners.
+
+47
+00:08:48,412 --> 00:08:53,042
+As you may well know by now, we can add many more.
+
+48
+00:08:53,292 --> 00:08:59,202
+I have chosen some of the plugins from the Google Code Project. 
+
+49
+00:08:59,452 --> 00:09:05,562
+I will explain them briefly.
+
+50
+00:09:05,812 --> 00:09:16,642
+These are standard listeners. The scenarios are listed. But let me best explain this with an example.
+
+51
+00:09:16,892 --> 00:09:33,642
+Let's delete all sampler data of the preceding run and then run the test plan again.
+
+52
+00:09:33,892 --> 00:09:42,562
+You can see that the virtual users log in linearly.
+
+53
+00:09:42,812 --> 00:09:46,312
+The bar chart shows that the first users have already given their feedback.
+
+54
+00:09:46,562 --> 00:09:51,202
+Let's walk through the individual views.
+
+55
+00:09:51,452 --> 00:10:04,002
+The Aggregate Report provides a table with the scenario and the individual actions in that scenario.
+
+56
+00:10:04,252 --> 00:10:21,202
+The Result Tree show the activities as a list. You can have a look at the protocol of each individual request and response. 
+
+57
+00:10:21,452 --> 00:10:24,082
+The results are also available as a table.
+
+58
+00:10:24,332 --> 00:10:26,322
+The next Listener is the Load Profile
+
+59
+00:10:26,572 --> 00:10:32,322
+The graph shows, that the 100 users logged in within 5 seconds.
+
+60
+00:10:32,572 --> 00:10:44,202
+Next a very popular metric, Hits per Second.
+
+61
+00:10:44,452 --> 00:10:50,002
+At the beginning, when the 100 users were logged in, we have some vigorous swings.
+
+62
+00:10:50,252 --> 00:10:58,242
+Out of these two, you can build a composite graph.
+
+63
+00:10:58,492 --> 00:11:14,082
+For example, you can overlay the Load Profile with the Hits per Second (at the moment, there is no data, we will wait until the next run).
+
+64
+00:11:14,332 --> 00:11:20,082
+The next listener shows the Response Times Over Time for the individual activities.
+
+65
+00:11:20,332 --> 00:11:46,922
+The scenario has almost finished. Now we could test the user experience under load by tapping on the icons and observing the reaction of the system.
+
+66
+00:11:47,172 --> 00:11:58,602
+As you can see, now it takes a while until you can see a reaction when we tap an icon. At the second and third tap the reaction is again faster.
+
+67
+00:11:58,852 --> 00:12:07,922
+Looking closely, we see that the scenario is already finished and there was no load anymore.
+
+68
+00:12:08,172 --> 00:12:11,672
+We should have performed the test while the 100 users were active (KQC moves the mouse cursor around an area in the diagram).
+
+69
+00:12:11,922 --> 00:12:27,082
+The red line represents the users. The blue line represents the session (login). After 16 seconds the last user has logged in.
+
+70
+00:12:27,332 --> 00:12:53,802
+Then the actual use case is performed: 100 users giving feedback (green line), 10 times in a row, superimposed ...
+
+71
+00:12:54,052 --> 00:12:57,552
+After having given their feedback, the users begin to log off (brown line).
+
+72
+00:12:57,802 --> 00:13:05,682
+
+
+73
+00:13:05,932 --> 00:13:10,802
+Now we can work with the Composite listener.
+
+74
+00:13:11,052 --> 00:13:15,282
+There is a list of all available sources.
+
+75
+00:13:15,532 --> 00:13:21,722
+Now you can start overlapping graphs to draw conclusions.
+
+76
+00:13:21,972 --> 00:13:29,562
+This is the load profile.
+
+77
+00:13:29,812 --> 00:13:34,162
+Now we add the Server Hits per Second.
+
+78
+00:13:34,412 --> 00:13:58,242
+The composed graph shows heavy traffic at the beginning during the login, while it is quite regular during the actual use case scenario of giving feedback.
+
+79
+00:13:58,492 --> 00:14:02,002
+During logout, the swings are again more vigorous.
+
+80
+00:14:02,252 --> 00:14:12,722
+You can now add others listeners you had activated before.
+
+81
+00:14:12,972 --> 00:14:22,842
+It is also interesting to have a look at the successful and failed transactions.
+
+82
+00:14:23,092 --> 00:14:26,592
+In this case, there were no failed transactions.
+
+83
+00:14:26,842 --> 00:14:45,162
+My high-performance iMac with 4 cores and 16 GB RAM did not produce any failures.
+
+84
+00:14:45,412 --> 00:15:00,162
+I recommend having a look at the performance of your system as well, the impact of the scenario on your CPU, memory utilization etc.
+
+85
+00:15:00,412 --> 00:15:08,322
+The task of the homework assignment is to run two scenarios in parallel.
+
+86
+00:15:08,572 --> 00:15:16,842
+To do this, you have to configure the test plan accordingly.
+
+87
+00:15:17,092 --> 00:15:20,962
+Also, you are supposed to limit the individual scenarios in time.
+
+88
+00:15:21,212 --> 00:15:27,802
+All these settings are available in the options. You will learn about all these options while you work through the documentation, videos and other material.
+
