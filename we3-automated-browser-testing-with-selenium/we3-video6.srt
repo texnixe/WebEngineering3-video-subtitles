@@ -1,0 +1,275 @@
+0
+00:00:00,000 --> 00:00:06,082
+Welcome to a new chapter on Web Engineering.
+
+1
+00:00:10,682 --> 00:00:17,882
+This chapter is about Automatic Browser Testing with the de facto industry standard Selenium.
+
+2
+00:00:18,132 --> 00:00:22,762
+The Learning objectives of this chapter are:
+
+3
+00:00:23,012 --> 00:00:33,522
+1. Understanding the Selenium Tool Suite.
+The Selenium Tool Suite includes a number of different tools.
+
+4
+00:00:33,772 --> 00:00:57,762
+- Selenium IDE, an integrated development environment, that allows recording, editing, and debugging test scripts in the browser.
+
+5
+00:00:58,012 --> 00:01:14,842
+- Selenium Builder: offers easy access to cloud-based services like GitHub, Sauce Labs etc.
+
+6
+00:01:15,092 --> 00:01:34,402
+- Server Grid: a server infrastructure that allows running an arbitrary number of Selenium tests in parallel on multiple machine, on different OS, and on different browser instances.
+
+7
+00:01:34,652 --> 00:01:55,602
+Selenium WebDriver: originally two projects, taken over by the W3C to create a W3C recommendation for a WebDriver API.
+
+8
+00:01:55,852 --> 00:02:08,082
+The core developers of the Selenium Suite are Jason Huggins of ThoughWorks and Simon Steward of Google.
+
+9
+00:02:08,332 --> 00:02:19,602
+James Huggins developed the Selenium IDE in 2004 as a JavaScript framework.
+
+10
+00:02:19,852 --> 00:02:27,722
+Simon Steward developed the driver architecture for arbitrary browsers.
+
+11
+00:02:27,972 --> 00:02:49,162
+You will learn how to perform functional GUI tests using Firefox with the plugins Selenium IDE and Selenium Builder.
+
+12
+00:02:49,412 --> 00:02:59,762
+The interactions of the user with the application in the browser are recorded, 
+
+13
+00:03:00,012 --> 00:03:08,922
+then, the script can be edited and assertions can be included.
+
+14
+00:03:09,172 --> 00:03:22,082
+Assertions verify that the state of the application conforms to what is expected or required.
+
+15
+00:03:22,332 --> 00:03:48,322
+For example, make sure that a particular text or element is showing on a page to test of the end to end requirement are met (acceptance tests). 
+
+16
+00:03:48,572 --> 00:04:07,162
+You will then learn how to install such tests on a server farm, a "server grid".
+
+17
+00:04:07,412 --> 00:04:09,009
+Today, such a server farm is cloud-based, because the resources of a local machine are not sufficient.
+
+18
+00:04:16,972 --> 00:04:25,442
+Cloud-based services like Sauce Labs run thousands of virtual machines to test dozens of OS, dozens of browser versions of dozens of manufacturers
+
+19
+00:04:25,692 --> 00:04:46,322
+(Google, Microsoft, Mozilla, Opera etc.) in parallel with only one script. 
+
+20
+00:04:46,572 --> 00:04:52,482
+In this course, we can only do this locally.  
+
+21
+00:04:52,732 --> 00:05:00,282
+However, we will not use the script that is generated with Selenium IDE in the browser,
+
+22
+00:05:00,532 --> 00:05:17,162
+but we will create it manually using the WebDriver API that is currently being worked on as a W3C recommendation.
+
+23
+00:05:17,412 --> 00:05:23,442
+We will use Apache JMeter.
+
+24
+00:05:23,692 --> 00:05:29,562
+We will provision JMeter with some additional plugins,
+
+25
+00:05:29,812 --> 00:05:35,602
+especially with Firefox Web Driver Sampler.
+
+26
+00:05:35,852 --> 00:05:50,322
+Then, we will create functional test using commands of the WebDriver API.
+
+27
+00:05:50,572 --> 00:06:05,762
+While the test plan is running, Apache JMeter will start a local instance of Firefox and execute the script.
+
+28
+00:06:06,012 --> 00:06:12,322
+This is called "driving the browser", i.e.,
+
+29
+00:06:12,572 --> 00:06:25,242
+the browser is not controlled via Javascript but from outside via an API,
+
+30
+00:06:25,492 --> 00:06:32,722
+that is implemented by the browser manufacturers (Google, Mozilla, Microsoft etc).
+
+31
+00:06:32,972 --> 00:06:40,122
+In this chapter we do this by the example of Firefox.
+
+32
+00:06:40,372 --> 00:07:07,362
+As an outlook on the offshore Scrum project, we will deal with a cloud-based Continuous Integration system.
+
+33
+00:07:07,612 --> 00:07:17,722
+We will make the resources of the project publicly available in a GitHub repo.
+
+34
+00:07:17,972 --> 00:07:25,162
+We will also place the test scripts we build with Selenium Builder into this repo.
+
+35
+00:07:25,412 --> 00:07:38,562
+With each commit into this repository, the build and test cycle will be triggered.
+
+36
+00:07:38,812 --> 00:07:57,642
+Travis CI is a cloud-based Continuous Integration Framework. It monitors if there are changes in a repo (GitHub, SourceForge or others).
+
+37
+00:07:57,892 --> 00:08:38,562
+It registers if there is a push or a pull request, and if this is the case, the test scripts stored in GitHub will be executed in OpenSauce. 
+
+38
+00:08:38,812 --> 00:09:03,762
+The first learning objective was getting to know the different tools of Selenium Tool Suite and to test them on a small scale.
+
+39
+00:09:04,012 --> 00:09:09,442
+2. Know the Test Automation Pyramid.
+This section will be more theoretical.
+
+40
+00:09:09,692 --> 00:09:18,242
+The focus will be on thinking about test automation in the various phases of development.
+
+41
+00:09:18,492 --> 00:09:25,682
+Mike Cohn is one of the core developers of the scrum method.
+
+42
+00:09:25,932 --> 00:09:32,562
+He defined the test automation pyramid.
+
+43
+00:09:32,812 --> 00:09:43,682
+We will take a closer look at this pyramid and the criticism aimed at it,
+
+44
+00:09:43,932 --> 00:09:47,432
+i.e. that today the pyramid is turned upside-down.
+
+45
+00:09:47,682 --> 00:10:03,882
+Like the model on which it is based, the pyramid has a broad foundation, where the unit tests are located that are supposed to test up to 100% of the functionality. 
+
+46
+00:10:04,132 --> 00:10:16,802
+That is, not only the public functions, but also the private once. The aim is to approach a code coverage of 100%.
+
+47
+00:10:17,052 --> 00:10:22,442
+In reality, this will not be the case.
+
+48
+00:10:22,692 --> 00:10:38,002
+In other layers of the pyramid, we have the Web services that need to be tested.
+
+49
+00:10:38,252 --> 00:10:49,162
+From integration test and acceptance test up to end-to-end user tests at the top of the pyramid.
+
+50
+00:10:49,412 --> 00:10:57,042
+There should only be a few that guarantee the acceptance of the complete system.
+
+51
+00:10:57,292 --> 00:11:20,242
+Today, it is rather vice versa, hardly anyone develops JUnit tests, but relies on browser-based functional testing of critical paths, critical application scenarios.
+
+52
+00:11:20,492 --> 00:11:28,762
+and perhaps does this extensively, so that you will find the foundation at the top.
+
+53
+00:11:29,012 --> 00:11:33,002
+A pyramid turned upside-down.
+
+54
+00:11:33,252 --> 00:11:36,752
+Let's get to the Homework Assignment:
+
+55
+00:11:37,002 --> 00:12:24,202
+Your task is to record functional aspects of arsnova.eu, ideally a complete use case as described in the manual, in <b>Selenium Builder</b>. 
+
+56
+00:12:24,452 --> 00:13:03,082
+Then, you will start a local Firefox browser instance via Apache JMeter, start the ARSnova start page via the WebDriver API and query the page for assertive elements.
+
+57
+00:13:03,332 --> 00:13:22,002
+The next task is to use loadosophia.org for test documentation. Loadosophia is a free service for storing and analyzing performance test results.
+
+58
+00:13:22,252 --> 00:13:33,002
+We will try this service on our homework assignment #1 of the last chapter.
+
+59
+00:13:33,252 --> 00:13:51,242
+You can generate all graphs, key performance indicators etc. by simple export from Apache JMeter.
+
+60
+00:13:51,492 --> 00:14:00,242
+The result will be a free report offered as a PDF file.
+
+61
+00:14:00,492 --> 00:14:07,242
+To summarize:
+Your submission will consist of:
+
+62
+00:14:07,492 --> 00:14:22,522
+A Selenium Builder Test Script in .json format, that the peer reviewers will load, run and test in their Firefox instance.
+
+63
+00:14:22,772 --> 00:14:35,562
+A JMeter Test Plan that proves that your are the author of the document you will submit as PDF
+
+64
+00:14:35,812 --> 00:14:53,882
+And finally, the Loadosophia Test Report.
+
+65
+00:14:54,132 --> 00:15:00,682
+The deadline for submission is July 7, 23:59 CEST.
+
+66
+00:15:00,932 --> 00:15:07,802
+Here, finally, the symbol for this chapter, the Test Automation Pyramid.
+
+67
+00:15:08,052 --> 00:15:23,040
+You are expected to read critical texts on this pyramid and to think about why the pyramid shouldn't be turned upside-down.
+
