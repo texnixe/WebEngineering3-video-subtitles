@@ -1,0 +1,301 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.000
+Welcome to the last unit of this capital.
+
+2
+00:00:06.000 --> 00:00:18.000
+In this video, I will be discussing the semester project
+"Vagrant up" and "Travis CI".
+
+
+3
+00:00:19.000 --> 00:00:25.000
+I will now scroll in the description of the text.
+
+
+4
+00:00:26.000 --> 00:00:37.000
+As you know, you must have your own html5 project available,
+which is hosted by github.
+
+
+5
+00:00:38.000 --> 00:00:47.000
+If you can't do this, then use our alternate flashcard project, THMcards.
+(editor: See note 1 on the slide)
+
+6
+00:00:48.000 --> 00:00:55.000
+The resources are here
+(editor: https://github.com/thm-projects/thmcards)
+
+7
+00:00:56.000 --> 00:01:05.000
+The THMCards will be used in September for the SCRUM project.
+
+8
+00:01:06.000 --> 00:01:10.000
+Now what should you do?
+
+8
+00:01:11.000 --> 00:01:30.000
+In homework 3, you used a build pipeline with Jenkins as your setup for your project or the THMcards project.
+
+
+9
+00:01:31.000 --> 00:01:50.000
+For semester project, you will build a website for the cloud with the open source Travis CI tool.
+
+9
+00:01:51.000 --> 00:02:10.000
+Your semester project will have a Vagrant file. Your peer reviewers will go to github and clone your Vagrant project to their own computer and then do a "vagrant up".
+
+10
+00:02:11.000 --> 00:02:20.000
+This will create a Virtual Machine, which by doing "vagrant up" will show that your machine will start.
+
+
+11
+00:02:21.000 --> 00:02:26.000
+Your peer reviewers will do "vagrant up" and your VM will come up;
+that's the vision.
+
+
+12
+00:02:27.000 --> 00:02:34.000
+You can get help with the vagrant documentation, which you can find on the vagrantup.com website.
+
+13
+00:02:35.000 --> 00:02:50.000
+Similarly, you can find the puppet documentation with recipes (patterns) on the puppetcookbook website.
+
+14
+00:02:55.000 --> 00:03:00.000
+Travis will be used in this pipeline to get quality assurance.
+
+15
+00:03:03.000 --> 00:03:23.000
+We will not use what we used in homework 3.
+Instead we will use Selenium Builder test,
+that means an user interface test,
+not with the Selenium IDE,
+rather with the Selenium Builder.
+
+16
+00:03:24.000 --> 00:03:36.000
+Since I am in Firefox, I can now show you the Seliumun Builder,
+so that there isn't any misunderstanding.
+
+
+17
+00:03:37.000 --> 00:03:40.000
+Here are additional plugins.
+
+18
+00:03:41.000 --> 00:03:51.000
+1) export your test scripts directly to github.
+That's why your project needs to be hosted on github.
+
+19
+00:03:52.000 --> 00:04:07.000
+2) export to open source platform from Saucelabs
+
+20
+00:04:08.000 --> 00:04:15.000
+We are now coming to pipeline in the cloud from Travis.
+
+
+21
+00:04:16.000 --> 00:04:20.000
+I will now show you the .travis.yml file,
+which is not here in this example.
+
+22
+00:04:21.000 --> 00:04:22.000
+rather 
+
+00:04:23.000 --> 00:04:25.000
+it is here.
+
+
+23
+00:04:26.000 --> 00:04:40.000
+In your semester project or in the forked THMcards project,
+you should have such a
+.travis.yml
+file.
+
+24
+00:04:40.000 --> 00:05:10.000
+Here you can see in the front end from ARSnova,
+how Sencha Command is built.
+1) wget zip file
+2) unzip
+etc.
+
+
+25
+00:05:11.000 --> 00:05:20.000
+before_install
+notifications
+
+
+26
+00:05:21.000 --> 00:05:30.000
+Naturally, everything is documented on the travis-ci.com website.
+
+26
+00:05:30.000 --> 00:06:05.000
+There are many options.
+We are using:
+VM => virtual box
+language => javascript (node.js)
+options => puppet (not used chef)
+
+26
+00:06:06.000 --> 00:06:15.000
+There are several versions of
+node.js
+that you can use..
+
+
+27
+00:06:16.000 --> 00:06:33.000
+When there is a commit,
+then through the
+.travis.yml
+file,
+the Travis platform is notified of the commit,
+which triggers the build process in the cloud.
+
+
+28
+00:06:34.000 --> 00:06:40.000
+We are now in the platform.
+We see for example,
+ARSnova backend (thm-projects/arsnova-war)
+
+29
+00:06:41.000 --> 00:07:00.000
+I want to verify that everything went ok.
+As you can see from:
+'The command "mvn test -B" exited with 0.'
+that the unit test passed,
+
+
+30
+00:07:01.000 --> 00:07:06.000
+which is confirmed by this
+green passing box.
+
+31a
+00:07:07.000 --> 00:07:23.000
+In summary:
+1) github commit
+2) triggers a build
+3) platform is built
+   (we see with what tools and what versions)
+
+
+31b
+00:07:24.000 --> 00:07:46.000
+4) Selenium interpreter from SauceLabs is called,
+using the test script that you exported from Firefox.
+
+
+31c
+00:07:47.000 --> 00:08:06.000
+You see here results
+with various browsers using different operating systems.
+
+32
+00:08:07.000 --> 00:08:10.000
+All is free for open source projects.
+
+33
+00:08:11.000 --> 00:08:45.000
+Let's look at a recent result.
+This was run by your teaching assistant, Thelan.
+(by commana-mni)
+
+
+33
+00:08:47.000 --> 00:08:52.000
+Windows platform
+Windows 7
+
+34
+00:08:54.000 --> 00:09:00.000
+Chrome browser
+Version 27
+
+35
+00:09:01.000 --> 00:09:10.000
+the Travis environment
+
+
+36
+00:09:11.000 --> 00:09:39.000
+Travis did the samething as was previously done with: 
+Jenkins
+vagrant up
+start.sh
+
+37
+00:09:40.000 --> 00:09:48.000
+We can see the logs (selenium log)
+metadata
+and screencast.
+
+
+38a
+00:09:49.000 --> 00:10:00.000
+Saucelabs Selenium Builder is better than 
+sliced bread.
+
+38b
+00:10:01.000 --> 00:10:20.000
+Everything is free, if you are doing an open source project.
+If you are doing a private build, then it is not free, 
+and you need to press other buttons.
+
+39a
+00:10:21.000 --> 00:10:40.000
+Let's look at a screencast.
+
+39b
+00:10:41.000 --> 00:10:49.000
+Chrome browser from Windows 7 will be started.
+
+39c
+00:11:22.000 --> 00:11:40.000
+Login as: guest
+
+40
+00:11:41.000 --> 00:11:50.000
+We are using an old chrome browser with Windows 7,
+which customers may have.
+
+42
+00:12:15.000 --> 00:12:22.000
+The session will be deleted.
+
+50
+00:13:30.000 --> 00:13:40.000
+You can try to figure out what want wrong.
+
+
+
+1000
+00:13:58.000 --> 00:14:02.000
+Wishing you success.
+
+
+Credits
+00:14:03.000 --> 00:14:15.000
+Translated by:
+Jim Oser
+oserj@oserconsulting.com
+www.oserconsulting.com
