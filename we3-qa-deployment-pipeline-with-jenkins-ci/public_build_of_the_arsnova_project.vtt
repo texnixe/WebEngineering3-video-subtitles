@@ -1,0 +1,262 @@
+WEBVTT
+
+1
+00:00:05.122 --> 00:00:05.482
+Let's start with the first learning unit, the public QA deployment pipeline.
+
+2
+00:00:05.732 --> 00:00:13.002
+I have explained this sequence diagram in the introductory unit of this chapter.
+
+3
+00:00:13.242 --> 00:00:27.082
+Now, I will show you the real object behind it, i.e. the pipeline as  used by the ARSnova project for all developers.
+
+4
+00:00:30.459 --> 00:00:40.162
+In this tab, I have opened the current release of the ARSnova app.
+
+5
+00:00:40.412 --> 00:00:57.882
+Let's start with a Smoke Test to check if the app behaves as expected.
+
+6
+00:00:58.132 --> 00:01:11.562
+With such an app - a feedback system - it is useful to run a test that stresses the database.
+
+7
+00:01:11.812 --> 00:01:18.522
+Therefore, let's create a session.
+
+8
+00:01:18.772 --> 00:01:31.442
+KQC creates a new session ....
+
+9
+00:01:31.692 --> 00:01:40.082
+If that works, a lot is gained. Yes, it looks quite alright as it should because this is the production environment.
+
+10
+00:01:40.332 --> 00:01:51.602
+Since this was just a test, we will delete the session again.
+
+11
+00:01:51.852 --> 00:01:54.962
+KQC deletes session.
+
+12
+00:01:55.212 --> 00:02:00.362
+And we are back at the starting point.
+
+13
+00:02:00.612 --> 00:02:09.922
+This is the same smoke test that we have implemented in the Travis CI pipeline that we will look at later.
+
+14
+00:02:10.172 --> 00:02:18.122
+We start at the beginning of the pipeline, with the version management system.
+
+15
+00:02:18.372 --> 00:02:30.282
+What you see here is the Jenkins Plugin that visualizes the individual stages of the pipeline.
+
+16
+00:02:30.532 --> 00:02:37.362
+This plugin is interactive, that means we can access the artifacts, trigger the build process etc.
+
+17
+00:02:37.612 --> 00:02:45.602
+Before I can do this, however, I have to log in.
+
+18
+00:02:45.852 --> 00:02:51.642
+
+
+19
+00:02:51.892 --> 00:02:56.282
+Now, we have several possibilities, we can trigger the build manually ...
+
+20
+00:02:56.532 --> 00:02:59.682
+Before I do this, I show you the ARSnova repository.
+
+21
+00:02:59.932 --> 00:03:05.322
+This is the repository on Github.
+
+22
+00:03:05.572 --> 00:03:27.962
+If you make a commit here, Jenkins would react to this commit, because it checks the  system for changes at certain intervals.
+
+23
+00:03:28.212 --> 00:03:44.082
+This is the way it is implemented here. Another way is to implement hooks, so that Jenkins is started automatically after a commit was checked in.
+
+24
+00:03:44.332 --> 00:03:47.362
+Let's look at the different stages here:
+
+25
+00:03:47.612 --> 00:03:53.962
+The first is the frontend that I have shown at the beginning and that you already know.
+
+26
+00:03:54.212 --> 00:04:08.922
+Secondly, the backend that implements the Restful API of this app. Basically, this is JavaEE
+
+27
+00:04:09.172 --> 00:04:17.122
+realized with the Spring Framework and numerous other components.
+
+28
+00:04:17.372 --> 00:04:21.402
+Third, CouchDB for data storage.
+
+29
+00:04:21.652 --> 00:04:33.162
+As soon as the front- and backend of the software is build and the unit test are successful,
+
+30
+00:04:33.412 --> 00:04:52.882
+the jobs that are listed here are triggered, e.g. the  User Acceptance Test with a Selenium GUI Script
+
+31
+00:04:53.132 --> 00:05:00.042
+e.g. creating or deleting a session.
+
+32
+00:05:00.292 --> 00:05:09.562
+WAI tests for accessibility with automated tools.
+
+33
+00:05:09.812 --> 00:05:19.722
+Performance tests with Apache JMeter
+
+34
+00:05:19.972 --> 00:05:32.322
+Security tests to test if the app is secured against brute force attacks etc.
+
+35
+00:05:32.572 --> 00:05:44.682
+And static code analysis with SonarQube. This analysis might take longer that other test stages.
+
+36
+00:05:44.932 --> 00:06:02.242
+Once the User Acceptance Test is successful, a deployment is triggered
+
+37
+00:06:02.492 --> 00:06:23.362
+In this case, this stage is triggered manually, i.e. a person checks and evaluates the results and In diesem Fall wird diese Phase manuell ausgelöst, i.e. a person checks and evaluates the results and decides if the release may be deployed.
+
+38
+00:06:23.612 --> 00:06:35.402
+For illustration purposes, I well now start the build ...
+
+39
+00:06:35.652 --> 00:06:44.322
+You can see here in the yellow box, that I have triggered the build on this date and time ...
+
+40
+00:06:44.572 --> 00:06:49.362
+
+
+41
+00:06:49.612 --> 00:07:00.762
+Now, the stage is finished, the frontend was built with Sencha Touch Command
+
+42
+00:07:01.012 --> 00:07:11.362
+and the Javascript and CSS files were minified and concatenated.
+
+43
+00:07:11.612 --> 00:07:22.642
+Now the backend is built. This is the same as what you do when running the start script in the VM after Vagrant Up.
+
+44
+00:07:22.892 --> 00:07:36.722
+Yellow indicates that the pipeline is unstable.
+
+45
+00:07:36.972 --> 00:07:40.122
+Now this has finished as well.
+
+46
+00:07:40.372 --> 00:07:50.842
+All stages of the pipeline have been processed.
+
+47
+00:07:51.092 --> 00:07:59.162
+And the decisive stage, which is followed by the Pre-Deployment Stage, was also triggered.
+
+48
+00:07:59.412 --> 00:08:11.442
+The whole process was quite fast so that we didn't even see the progress indicators.
+
+49
+00:08:11.692 --> 00:08:27.882
+We can now open the logs and see what happened during the individual stages. This is the log file of the frontend build.
+
+50
+00:08:28.132 --> 00:08:33.522
+And here the log of the backend build.
+
+51
+00:08:33.772 --> 00:08:42.522
+In this case, everything was fine. The logs will give you valuable information for debugging when something went wrong.
+
+52
+00:08:42.772 --> 00:08:51.162
+What you see here in particular are the numerous unit tests that were run.
+
+53
+00:08:51.412 --> 00:09:02.682
+Let's have a brief look at the result of the static code analysis.
+
+54
+00:09:02.932 --> 00:09:18.562
+The static code analysis generates several quality assurance metrics.
+
+55
+00:09:18.812 --> 00:09:24.482
+The results can be displayed graphically in SonarQube.
+
+56
+00:09:24.732 --> 00:09:27.082
+This was build #6.
+
+57
+00:09:27.332 --> 00:09:39.642
+When we change to the start page of this Jenkins job, we will see the SonarQube results.
+
+58
+00:09:39.892 --> 00:09:51.882
+Here you can see if the code has improved or deteriorated.
+
+59
+00:09:52.132 --> 00:09:57.642
+The unit test coverage is at 100%, with 77 tests in 7 seconds.
+
+60
+00:09:57.892 --> 00:10:07.202
+Here, we have the number of issues and their categories.These issues should be resolved.
+
+61
+00:10:07.452 --> 00:10:29.402
+The technical debt indicates the work load for the developers who take over the code if the issues are not resolved. In this case, it is 4 days and hours.
+
+62
+00:10:29.252 --> 00:10:37.762
+So much for the pipeline.
+
+63
+00:10:38.012 --> 00:10:40.322
+Now we should do a short smoke test to check if the system is still running.
+
+64
+00:10:40.572 --> 00:10:44.122
+Looks good.
+
+65
+00:10:44.372 --> 00:10:59.682
+We now have a new release with a commit, which produced no code changes. It was triggered manually, and we our system is in a stable delivery state again.
+
